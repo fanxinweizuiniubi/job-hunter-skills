@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Preparation Report</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: #f5f7fa;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 40px 48px;
+        }
+        .header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .header .meta { opacity: 0.9; font-size: 1rem; }
+        .header .meta span { margin-right: 24px; }
+        .content { padding: 40px 48px; }
+        .section { margin-bottom: 40px; }
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        .section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin: 24px 0 12px 0;
+        }
+        .readiness-card {
+            background: var(--gray-50);
+            border-radius: 10px;
+            padding: 24px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 20px;
+        }
+        .readiness-card .score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .readiness-card .label { font-size: 0.875rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.05em; }
+        .question-card {
+            background: var(--gray-50);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--gray-200);
+        }
+        .question-card .question-text {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+        .question-card .question-meta {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-bottom: 12px;
+        }
+        .question-card .question-meta .tag {
+            display: inline-block;
+            background: var(--gray-200);
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-right: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .question-card .answer {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid var(--success);
+            margin-top: 12px;
+        }
+        .question-card .answer .answer-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .answer-section {
+            margin-bottom: 10px;
+        }
+        .answer-section .section-title {
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .answer-section .section-text {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        .followup-card {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 16px;
+            border-left: 3px solid var(--warning);
+            margin-top: 12px;
+        }
+        .followup-card .followup-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+        .gap-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--gray-300);
+        }
+        .gap-item.critical { border-left-color: var(--danger); }
+        .gap-item.high { border-left-color: var(--warning); }
+        .gap-item.medium { border-left-color: var(--primary); }
+        .gap-item.low { border-left-color: var(--success); }
+        .gap-severity {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .gap-severity.critical { background: #fef2f2; color: var(--danger); }
+        .gap-severity.high { background: #fefce8; color: var(--warning); }
+        .gap-severity.medium { background: #eff6ff; color: var(--primary); }
+        .gap-severity.low { background: #f0fdf4; color: var(--success); }
+        .gap-content h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+        .gap-content p { font-size: 0.9rem; color: var(--gray-600); }
+        .gap-action { font-size: 0.85rem; color: var(--gray-700); margin-top: 6px; font-style: italic; }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .tip-card {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+        }
+        .tip-card h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; color: var(--gray-700); }
+        .tip-card p { font-size: 0.9rem; color: var(--gray-600); }
+        .quick-ref {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            border-radius: 10px;
+            padding: 24px;
+        }
+        .quick-ref h3 { color: white; margin-bottom: 16px; }
+        .quick-ref .ref-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .quick-ref .ref-item:last-child { border-bottom: none; }
+        .quick-ref .ref-item .ref-q { font-weight: 600; margin-bottom: 4px; }
+        .quick-ref .ref-item .ref-a { opacity: 0.85; font-size: 0.9rem; }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            border-top: 1px solid var(--gray-200);
+        }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; border-radius: 0; }
+            .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Interview Preparation Report</h1>
+            <div class="meta">
+                <span>{{JOB_TITLE}}</span>
+                <span>{{COMPANY_NAME}}</span>
+                <span>{{INTERVIEW_STAGE}}</span>
+                <span>{{DATE}}</span>
+            </div>
+        </div>
+        <div class="content">
+            <!-- OVERALL READINESS -->
+            <div class="section">
+                <h2>Overall Readiness</h2>
+                <div class="readiness-card">
+                    <div class="score">{{READINESS_SCORE}}</div>
+                    <div class="label">Overall Readiness Score</div>
+                    <p style="margin-top:12px; color: var(--gray-700);">{{READINESS_SUMMARY}}</p>
+                </div>
+            </div>
+
+            <!-- QUESTION BANK -->
+            <div class="section">
+                <h2>Interview Question Bank</h2>
+                {{QUESTIONS_SECTION}}
+            </div>
+
+            <!-- FOLLOW-UP GUIDE -->
+            <div class="section">
+                <h2>Anticipated Follow-Up Questions</h2>
+                {{FOLLOWUP_SECTION}}
+            </div>
+
+            <!-- PREPARATION CHECKLIST -->
+            <div class="section">
+                <h2>Preparation Checklist</h2>
+                {{GAPS_SECTION}}
+            </div>
+
+            <!-- INTERVIEW TIPS -->
+            <div class="section">
+                <h2>Role-Specific Interview Tips</h2>
+                <div class="tips-grid">
+                    {{TIPS_SECTION}}
+                </div>
+            </div>
+
+            <!-- QUICK REFERENCE -->
+            <div class="section">
+                <h2>Quick Reference Card</h2>
+                <div class="quick-ref">
+                    {{QUICKREF_SECTION}}
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Generated by Interview Coach | Good luck with your interview!
+        </div>
+    </div>
+</body>
+</html>
