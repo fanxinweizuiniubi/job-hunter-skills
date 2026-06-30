@@ -126,6 +126,48 @@
   .bar-red { background: var(--red); }
   .dim-weight { font-size: 12px; color: #999; margin-left: 8px; }
 
+  /* ====== JD Quality Assessment ====== */
+  .jd-quality { margin-bottom: 24px; }
+  .jd-qcard {
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .jd-qcard-danger { background: #fff5f5; border-left: 4px solid var(--red); }
+  .jd-qcard-warn { background: #fffbf0; border-left: 4px solid var(--yellow); }
+  .jd-qcard-ok { background: #f0fff4; border-left: 4px solid var(--green); }
+  .jd-qcard-info { background: var(--light-blue); border-left: 4px solid var(--accent); }
+  .jd-qcard h4 { font-size: 14px; margin-bottom: 6px; }
+  .jd-qcard p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+  .jd-summary-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  .jd-summary-table th { text-align: left; padding: 6px 10px; background: var(--light-gray); color: var(--text-secondary); font-weight: 600; border-bottom: 2px solid var(--border); }
+  .jd-summary-table td { padding: 6px 10px; border-bottom: 1px solid var(--light-gray); }
+  .jd-verdict {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .jd-verdict-apply { background: var(--light-green); color: #15803d; }
+  .jd-verdict-caution { background: var(--light-yellow); color: #b45309; }
+  .jd-verdict-warn { background: var(--light-red); color: #b91c1c; }
+
+  /* ====== Problem Diagnosis ====== */
+  .problem-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  .problem-table th { text-align: left; padding: 8px 12px; background: var(--light-gray); color: var(--text-secondary); font-weight: 600; border-bottom: 2px solid var(--border); }
+  .problem-table td { padding: 8px 12px; border-bottom: 1px solid var(--light-gray); vertical-align: top; line-height: 1.5; }
+  .attack-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+  .attack-green { background: var(--light-green); color: #15803d; }
+  .attack-yellow { background: var(--light-yellow); color: #b45309; }
+  .attack-red { background: var(--light-red); color: #b91c1c; }
+  .attack-script { margin-top: 14px; padding: 14px 18px; background: #f0fff4; border-radius: 10px; border-left: 4px solid var(--green); }
+  .attack-script h4 { font-size: 14px; color: #15803d; margin-bottom: 8px; }
+  .attack-script p { font-size: 13px; color: var(--text-secondary); margin: 0; line-height: 1.7; }
+  .attack-script code { background: #dcfce7; padding: 1px 6px; border-radius: 3px; font-size: 12px; color: #15803d; }
+
   /* ====== Two Column Layout ====== */
   .two-col {
     display: grid;
@@ -268,6 +310,50 @@
     </div>
   </div>
 
+  <!-- ====== JD Quality Assessment (Phase 0) ====== -->
+  <div class="card jd-quality">
+    <h2 class="section-title">JD 质量评估 — 先看岗位值不值得投</h2>
+    {{JD_QUALITY_CARDS}}
+    <table class="jd-summary-table">
+      <thead>
+        <tr>
+          <th>检查项</th>
+          <th>结果</th>
+          <th>风险</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{JD_QUALITY_TABLE}}
+      </tbody>
+    </table>
+    <div style="margin-top: 12px;">
+      <span class="jd-verdict {{JD_VERDICT_CLASS}}">{{JD_VERDICT}}</span>
+    </div>
+  </div>
+
+  <!-- ====== Problem Diagnosis ====== -->
+  <div class="card jd-quality">
+    <h2 class="section-title">🎯 面试攻击策略：他们想解决什么问题？</h2>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">每条JD职责背后都是一个待解决的业务问题。搞清楚这些问题，在面试中主动展示你的解决经验，比被动等对方提问有说服力得多。</p>
+    <table class="problem-table">
+      <thead>
+        <tr>
+          <th style="width:24%">JD职责</th>
+          <th style="width:28%">推断的业务问题</th>
+          <th style="width:30%">你的对应经验</th>
+          <th style="width:18%">攻击性</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{PROBLEM_ROWS}}
+      </tbody>
+    </table>
+    <div class="attack-script" style="margin-top:14px;">
+      <h4>💬 面试话术</h4>
+      {{ATTACK_SCRIPTS}}
+    </div>
+  </div>
+
   <!-- ====== Overall Score ====== -->
   <div class="score-section">
     <div class="gauge-container">
@@ -359,11 +445,7 @@
       <ol>{{SKILL_GAP_RECS}}</ol>
     </div>
     <div class="rec-section">
-      <h4>3. Interview Preparation</h4>
-      <ol>{{INTERVIEW_RECS}}</ol>
-    </div>
-    <div class="rec-section">
-      <h4>4. Application Strategy</h4>
+      <h4>3. Application Strategy</h4>
       <ol>{{STRATEGY_RECS}}</ol>
     </div>
   </div>

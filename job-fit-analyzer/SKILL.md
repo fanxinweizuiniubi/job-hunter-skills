@@ -1,6 +1,6 @@
 ---
 name: job-fit-analyzer
-description: "Analyze a job description and a candidate's resume to evaluate job compatibility. This skill should be used when a user wants to assess how well a resume matches a job posting, identify matching skills, experience gaps, missing qualifications, keyword coverage for ATS optimization, and overall competitiveness. It generates a structured assessment with a match score, key strengths, weaknesses, and actionable recommendations. Triggers include phrases like 'analyze this job', 'check my fit', 'am I qualified', 'resume match', 'job compatibility', 'tailor my resume', 'I'd like to find a new job', 'I want to find a job', 'I'm looking for a new job', 'help me find a job', 'job search', or when a user provides both a job description and a resume for evaluation. Also triggers when a user expresses general job-seeking intent without providing materials yet, or when they ask to analyze a job posting or resume in isolation."
+description: "Evaluates job compatibility by comparing a job description against a candidate's resume across five dimensions: hard skills, experience, education/certifications, ATS keyword coverage, and responsibilities alignment. Generates a scored HTML report with strengths, gaps, and recommendations. Also pre-screens JD quality for red flags (toxic culture indicators, vague requirements, salary mismatch). Use when the user provides a JD and resume, asks about job fit or qualifications, wants to tailor their resume, or expresses general job-seeking intent (e.g. 'analyze this job', 'check if I am qualified', 'help me find a job')."
 agent_created: true
 ---
 
@@ -48,11 +48,42 @@ Ask for their resume in the same message or as a follow-up:
 > "Great! Do you have a resume you'd like me to review? You can paste the text, upload a file, or share a link."
 
 ### Step 4: Once Both Are Available
-Proceed to the **Workflow** (Phase 1–5 below) to perform the full job-fit analysis.
+Proceed to the **Workflow** below to perform the full job-fit analysis.
 
 **Key principle:** Keep the conversation natural. Ask one or two questions at a time, not a checklist. Match the user's tone. The goal is to transition smoothly from a general intent to a concrete analysis.
 
 ## Workflow
+
+Copy this checklist and mark progress during analysis:
+
+```
+Job Fit Analysis Progress:
+- [ ] Phase 0: JD Quality Pre-Screen (6 checks)
+- [ ] Phase 1: Extract JD and resume structured data
+- [ ] Phase 2: Score all 5 dimensions
+- [ ] Phase 3: Qualitative analysis (gaps, strengths, weaknesses)
+- [ ] Phase 4: Generate actionable recommendations
+- [ ] Phase 5: Build HTML report from template
+- [ ] Phase 6: Verify report completeness (feedback loop)
+- [ ] Phase 7: Bridge to interview-coach (if score ≥ 65)
+```
+
+### Phase 0: JD Quality Pre-Screen (MANDATORY — run BEFORE scoring)
+
+Before scoring, analyze the JD for red flags and quality signals. This helps the candidate decide whether to even apply. Present findings as a **JD Quality Assessment** section at the top of the report, before the match score.
+
+Six checks are required. Full procedures, scoring rubrics, keyword tables, and interpretation guides are in [references/jd-quality-check.md](references/jd-quality-check.md). Summary:
+
+| # | Check | What it flags |
+|---|-------|---------------|
+| 1 | Salary vs. Responsibility | Pay mismatch with implied seniority/duties |
+| 2 | Red-Flag Keywords | Toxic culture or excessive workload signals (🔴 "抗压能力强", "996", etc.) |
+| 3 | Concreteness Score (0–100) | How specific and measurable the JD requirements are |
+| 4 | Generic/Specific Ratio | Ratio of vague soft-skill asks to concrete hard-skill requirements |
+| 5 | PUA / Culture Indicators | Subtle red flags beyond obvious keywords ("薪资open", "期权激励"无细节) |
+| 6 | Problem Diagnosis | Infer business problems behind each duty → map to candidate's experience |
+
+After analysis, generate the summary table (template in reference) and produce a "综合可投性" verdict: **建议投递 / 慎投 / 需面试验证**.
 
 ### Phase 1: Extract
 
@@ -61,7 +92,6 @@ Parse both documents and extract structured information.
 **From the Job Description, extract:**
 - Job title and seniority level
 - Required hard skills (technologies, tools, methodologies)
-- Required soft skills
 - Minimum years of experience
 - Education requirements (degree, field, level)
 - Certifications or licenses required
@@ -69,12 +99,12 @@ Parse both documents and extract structured information.
 - Preferred/bonus qualifications
 - Industry/domain knowledge requirements
 - Keywords likely used by ATS (compile a keyword list)
+- **JD quality signals** (already analyzed in Phase 0 — carry forward to report)
 
 **From the Resume, extract:**
 - Current/most recent job titles
 - Total years of relevant experience
 - Hard skills listed or demonstrated through experience
-- Soft skills demonstrated through achievements
 - Education (degree, field, institution)
 - Certifications held
 - Key achievements and responsibilities
@@ -85,16 +115,15 @@ Record extracted data in a structured format for comparison. Refer to `reference
 
 ### Phase 2: Compare and Score
 
-Run a multi-dimensional comparison using six evaluation dimensions. Each dimension is scored 0–100 and weighted to produce an overall match score.
+Run a multi-dimensional comparison using five evaluation dimensions. Each dimension is scored 0–100 and weighted to produce an overall match score. **Note: Soft Skills & Culture Fit has been intentionally removed** — soft skills cannot be reliably assessed from a resume, and are better evaluated during interviews.
 
 | Dimension | Weight | What it measures |
 |-----------|--------|------------------|
-| Hard Skills Match | 25% | Overlap between JD required skills and resume skills (direct + transferable) |
-| Experience Match | 20% | Years, seniority level, and relevance of experience |
+| Hard Skills Match | 30% | Overlap between JD required skills and resume skills (direct + transferable) |
+| Experience Match | 25% | Years, seniority level, and relevance of experience |
 | Education & Certifications | 15% | Degree level, field relevance, required certifications |
 | Keyword Coverage (ATS) | 15% | Percentage of JD keywords present in resume |
 | Responsibilities Alignment | 15% | Overlap between JD duties and candidate's past responsibilities |
-| Soft Skills & Culture Fit | 10% | Alignment of soft skills and working style indicators |
 
 **Overall Match Score** = weighted sum of all dimension scores (0–100).
 
@@ -104,7 +133,7 @@ Refer to `references/scoring-framework.md` for detailed scoring rubrics, transfe
 
 Beyond the score, produce qualitative analysis:
 
-1. **Matching Skills** — Skills the candidate has that directly match JD requirements. Group by category (technical, tools, domain, soft skills).
+1. **Matching Skills** — Skills the candidate has that directly match JD requirements. Group by category (technical, tools, domain).
 2. **Transferable Skills** — Skills not explicitly required but demonstrably applicable to the role.
 3. **Experience Gaps** — Areas where the candidate's experience falls short of requirements (years, scope, domain).
 4. **Missing Qualifications** — Required or preferred qualifications the candidate lacks entirely.
@@ -119,26 +148,60 @@ Generate actionable, specific recommendations to improve the candidate's chances
 
 1. **Resume Tailoring** — Specific changes to make (keywords to add, achievements to reframe, sections to reorder).
 2. **Skill Gap Mitigation** — How to address missing skills (courses, certifications, projects, framing transferable experience).
-3. **Interview Preparation** — Anticipated tough questions based on identified gaps; suggested talking points for strengths. For a comprehensive, personalized interview prep report with STAR answers, follow-up predictions, and role-specific tips, delegate to the `interview-coach` skill and pass the extracted JD/resume data along with the identified gaps.
-4. **Application Strategy** — Whether to apply directly, network first, or address gaps before applying.
+3. **Application Strategy** — Whether to apply directly, network first, or address gaps before applying.
+
+**Do NOT include interview preparation advice here.** Interview preparation (with STAR answers, mock Q&A, follow-up predictions) is the exclusive domain of the `interview-coach` skill. The job-fit-analyzer's role is to identify gaps and strengths; the interview-coach's role is to turn those into interview tactics. This is a clean separation of concerns.
 
 ### Phase 5: Generate Report
 
 Produce a self-contained HTML report using the template at `assets/report-template.html`. The report includes:
 
+- **JD Quality Assessment** (from Phase 0) — MUST appear at the top, before the match score. Include: salary match, red-flag keyword scan with specific findings, concreteness score, generic/specific ratio, PUA detection, problem diagnosis with Problem→Resume mapping table, and an overall "可投性" verdict
 - Header with job title, candidate name, and analysis date
 - Overall match score with a visual gauge
-- Dimension score breakdown (bar chart or progress bars)
+- Dimension score breakdown (bar chart or progress bars) — 5 dimensions, NOT 6
 - Matching skills summary
 - Gaps and missing qualifications
 - Keyword coverage table
+- **MANDATORY: Detailed Dimension Scoring Breakdown** — For every dimension, include a collapsible `<details>` section that shows:
+  - The exact calculation formula used
+  - A table listing every sub-factor with individual scores and judgment rationale
+  - For Experience dimension specifically: always show Years/Seniority/Relevance sub-scores AND all penalty deductions with specific amounts and reasons
+  - A final weighted-summary table showing all 5 dimension scores × weights = total
+  - The user must be able to trace every single point in the score back to its justification
 - Strengths and weaknesses
-- Actionable recommendations
+- Actionable recommendations (Resume Tailoring, Skill Gap Mitigation, Application Strategy — do NOT include interview preparation, that belongs to interview-coach)
 - Detailed appendix with full extraction data
 
 Save the report to the current working directory as `job-fit-report.html` (or a user-specified filename) and present it to the user.
 
-### Phase 6: Bridge to Interview Preparation (MANDATORY for recommended applications)
+### Phase 6: Verify Report Completeness (Feedback Loop)
+
+Before presenting the final result, verify the report against this checklist. If any item fails, fix it and re-verify.
+
+```
+Report Verification:
+- [ ] JD Quality Assessment is at the top, before match score
+- [ ] All 6 JD checks are present with specific findings (not generic)
+- [ ] Problem Diagnosis table maps each duty → problem → candidate experience
+- [ ] Overall score matches the weighted sum of 5 dimensions (recalculate)
+- [ ] Every dimension has a collapsible <details> with formula + sub-scores
+- [ ] Experience dimension shows Years/Seniority/Relevance sub-scores AND all penalties
+- [ ] Keyword coverage table includes priority-weighted items
+- [ ] Strengths and weaknesses are specific (not generic praise/criticism)
+- [ ] Recommendations section has exactly 3 categories: Resume Tailoring, Skill Gap Mitigation, Application Strategy
+- [ ] NO interview preparation content in recommendations (this belongs to interview-coach)
+- [ ] All template placeholders ({{...}}) are replaced with real content
+- [ ] Language matches the dominant language of JD/resume
+```
+
+If verification reveals issues:
+1. Note each issue with the specific section reference
+2. Fix the issue in the report
+3. Re-run the relevant checklist item
+4. Only proceed to Phase 7 when all items pass
+
+### Phase 7: Bridge to Interview Preparation (MANDATORY for recommended applications)
 
 After presenting the analysis report, **check the competitiveness assessment immediately**:
 
@@ -161,7 +224,7 @@ This bridge is **not optional** — it is a mandatory step in the workflow for a
 Always deliver:
 1. A concise text summary in the conversation (match score, top 3 strengths, top 3 gaps, overall verdict)
 2. The full HTML report file presented via `present_files`
-3. For scores ≥ 65: **MUST follow up with Phase 6**, proactively offering interview preparation with the `interview-coach` skill
+3. For scores ≥ 65: **MUST follow up with Phase 7**, proactively offering interview preparation with the `interview-coach` skill
 
 ## Language
 

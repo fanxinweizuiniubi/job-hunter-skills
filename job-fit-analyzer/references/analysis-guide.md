@@ -31,16 +31,9 @@ Extract all explicitly mentioned:
 
 Mark each as **Required** or **Preferred** based on which section it appears in.
 
-#### Soft Skills
-Extract both explicit and implicit:
-- **Explicit:** Phrases like "strong communication skills," "proven leadership," "ability to work independently"
-- **Implicit:**
-  - "Cross-functional collaboration" → Collaboration
-  - "Fast-paced environment" → Adaptability, stress tolerance
-  - "Drive initiatives" → Initiative, proactivity
-  - "Mentor junior team members" → Mentorship, leadership
-  - "Present to stakeholders" → Communication, presentation
-  - "Manage multiple priorities" → Time management, prioritization
+#### Soft Skills (DEPRECATED — no longer extracted or scored)
+
+Do NOT extract soft skills from JD or resume. Soft skills cannot be reliably assessed from a resume — they are evaluated during interviews. The JD analysis (Phase 0) will flag red-flag keywords like "抗压" "吃苦耐劳" as culture signals, but these are NOT scored in the match calculation.
 
 #### Experience Requirements
 - **Years:** Extract specific numbers ("5+ years," "3-5 years")
@@ -226,7 +219,7 @@ Based on the overall score and qualitative analysis, assign one of:
 
 ### Recommendation Generation
 
-Generate recommendations in four categories:
+Generate recommendations in three categories:
 
 #### 1. Resume Tailoring
 - Specific keywords to add (from gap analysis)
@@ -241,13 +234,7 @@ Generate recommendations in four categories:
 - Ways to frame transferable experience to cover gaps
 - Timeline estimates for gap closure
 
-#### 3. Interview Preparation
-- Anticipated questions about gaps (formulate suggested responses)
-- Questions the candidate should ask (based on JD analysis)
-- Talking points for strengths (how to frame them for this role)
-- Potential case studies or technical assessments to prepare for
-
-#### 4. Application Strategy
+#### 3. Application Strategy
 - Apply directly / Network first / Build skills first / Consider a different role
 - If stretching: suggest reaching out to recruiter with a tailored message
 - If strong: suggest applying with confidence and preparing for advancement discussions

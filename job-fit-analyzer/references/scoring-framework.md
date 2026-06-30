@@ -4,12 +4,14 @@ This document defines the detailed scoring methodology for the Job Fit Analyzer 
 
 ## Overall Score Calculation
 
-The overall match score is a weighted average of six dimension scores:
+The overall match score is a weighted average of five dimension scores:
 
 ```
-Overall Score = (HardSkills × 0.25) + (Experience × 0.20) + (EducationCerts × 0.15)
-              + (KeywordCoverage × 0.15) + (Responsibilities × 0.15) + (SoftSkills × 0.10)
+Overall Score = (HardSkills × 0.30) + (Experience × 0.25) + (EducationCerts × 0.15)
+              + (KeywordCoverage × 0.15) + (Responsibilities × 0.15)
 ```
+
+Note: Soft Skills & Culture Fit has been intentionally removed from the scoring framework. Soft skills cannot be reliably assessed from a resume alone — they are better evaluated during interviews. Including them in a resume-based analysis adds noise, not signal.
 
 Score range: 0–100.
 
@@ -25,7 +27,7 @@ Score range: 0–100.
 
 ## Dimension Scoring Rubrics
 
-### 1. Hard Skills Match (Weight: 25%)
+### 1. Hard Skills Match (Weight: 30%)
 
 Measures the overlap between skills required by the JD and skills the candidate possesses.
 
@@ -58,7 +60,7 @@ Dimension Score = ((DirectMatches × 1.0) + (TransferableMatches × 0.6)) / Tota
 - If a skill appears only in a "skills" list with no contextual evidence, credit at 80% (listed but not demonstrated)
 - If the JD has fewer than 3 required hard skills, broaden the scope to include preferred skills in the denominator
 
-### 2. Experience Match (Weight: 20%)
+### 2. Experience Match (Weight: 25%)
 
 Measures whether the candidate's experience level and relevance meet the JD's requirements.
 
@@ -177,36 +179,6 @@ Dimension Score = SumOfCredits / TotalResponsibilities × 100
 - "Led a team of 15 engineers" matches "manage and grow engineering team"
 - "Built CI/CD pipeline from scratch" matches "establish DevOps practices"
 - Context matters: a responsibility performed 5+ years ago is still valid but note recency
-
-### 6. Soft Skills & Culture Fit (Weight: 10%)
-
-Measures alignment between soft skills sought in the JD and those demonstrated in the resume.
-
-**Scoring procedure:**
-1. Extract implied/explicit soft skills from JD:
-   - Explicit: "excellent communication skills," "strong leadership"
-   - Implicit: "cross-functional collaboration" → collaboration; "fast-paced environment" → adaptability
-2. Match against evidence in resume:
-   - Achievement descriptions that demonstrate the soft skill → full credit
-   - Soft skill listed in a skills section → 60% credit (claimed but not demonstrated)
-   - No evidence → 0
-3. Calculate:
-
-```
-Dimension Score = SumOfCredits / TotalSoftSkills × 100
-```
-
-**Common soft skill categories:**
-- Leadership / management
-- Communication (written, verbal, presentation)
-- Collaboration / teamwork
-- Problem-solving / analytical thinking
-- Adaptability / learning agility
-- Initiative / proactivity
-- Project / time management
-- Mentorship / coaching
-- Stakeholder management
-- Customer focus
 
 ## Transferable Skill Mapping Reference
 
