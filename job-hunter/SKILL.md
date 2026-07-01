@@ -1,7 +1,10 @@
 ---
 name: job-hunter
 description: Help users find jobs and analyze job fit. Use when the user wants to analyze job descriptions against their resume, or prepare for interviews. Should be triggered by phrases like "find a job", "career", "求职", "找工作", "跳槽".
-agent_created: true
+metadata:
+  type: workflow
+  version: "1.0"
+  domain: career
 ---
 
 # Job Hunter

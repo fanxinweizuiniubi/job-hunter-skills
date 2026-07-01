@@ -1,35 +1,45 @@
-# Interview Transition
+# Interview Transition Guide
 
-Use this guide after presenting a completed job-fit report.
+Use this guide after delivering the completed job-fit report.
 
-## Trigger
+## Trigger Conditions
 
-Offer interview preparation when either condition is true:
+Proactively offer interview preparation **only** when **one** of the following is met:
 
-- overall score is `>= 65`
-- competitiveness assessment is `Competitive` or `Strong Candidate`
+- Overall score **≥ 65**
+- Competitiveness assessment is **"Competitive"** or **"Strong Candidate"**
 
-For scores below 65, focus on gap remediation and alternative role strategy. Mention interview prep only if the user asks.
+If score < 65, focus on gap remediation and application strategy. Only discuss interview prep if the user explicitly asks.
 
-## Offer
+## Offer Style
 
-Make the offer concrete and tied to the analysis. Cite one or two specific strengths or gaps from the report.
+Make the offer natural, specific, and tied to the analysis. Reference 1–2 concrete points from the report (strengths or key gaps).
 
-Examples:
+### Chinese Examples
+- “你的匹配度达到XX分，核心技能和经验都比较契合。要不要我基于这个JD和你的情况，帮你准备一套针对性的模拟面试题和STAR回答框架？”
+- “这个职位值得投递，我已经看到你在X和Y方面的优势。要继续帮你做面试准备吗？我可以针对这个JD生成重点问题和回答思路。”
 
-- Chinese: `你的匹配度不错，值得推进。要不要我基于这个 JD 和你的薄弱点，继续帮你生成一套模拟面试题和 STAR 回答框架？`
-- English: `This looks worth pursuing. Would you like me to turn this JD, your strengths, and the main gaps into targeted mock interview questions and STAR answer outlines?`
+### English Examples
+- “This is a solid match with a score of XX. Would you like me to create targeted mock interview questions and STAR responses based on this JD and your profile?”
+- “You have strong alignment in [specific strength]. Shall I prepare customized interview coaching, including likely questions and strong answer outlines?”
 
-## Handoff
+## Handoff Rules (if user agrees)
 
-If the user agrees, load `interview-coach` and pass:
+Switch to / load `interview-coach` skill and pass the following data:
 
-- extracted JD data
-- extracted resume data
-- overall score and competitiveness assessment
-- top strengths
-- top gaps and missing qualifications
-- JD problem diagnosis and attack points
-- application strategy recommendation
+- Full extracted JD data
+- Full extracted resume data
+- Overall score + competitiveness assessment
+- Top 3–5 strengths
+- Top 3–5 gaps and missing qualifications
+- JD problem diagnosis and Attack Points (from Phase 0)
+- Application strategy recommendations
 
-Do not generate the interview-preparation materials inside `job-fit-analyzer`; let `interview-coach` own that work.
+**Important**: Do **not** generate mock interview questions or answer frameworks inside `job-fit-analyzer`. Hand off cleanly to `interview-coach`.
+
+## Low-Score Handling
+
+For scores below 65:
+- Emphasize resume tailoring and skill gap closure first.
+- Offer to analyze other roles or help with long-term preparation strategy.
+- Only provide interview support upon user request.

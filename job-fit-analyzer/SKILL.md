@@ -1,23 +1,25 @@
 ---
 name: job-fit-analyzer
-description: "Evaluates job compatibility by comparing a job description against a candidate's resume across five dimensions: hard skills, experience, education/certifications, ATS keyword coverage, and responsibilities alignment. Generates a scored HTML report with strengths, gaps, and recommendations. Also pre-screens JD quality for red flags (toxic culture indicators, vague requirements, salary mismatch). Use when the user provides a JD and resume, asks about job fit or qualifications, wants to tailor their resume, or expresses general job-seeking intent (e.g. 'analyze this job', 'check if I am qualified', 'help me find a job')."
+description: Evaluates job compatibility by comparing a job description against a candidate's resume across five dimensions — hard skills, experience, education/certifications, ATS keyword coverage, and responsibilities alignment. Also pre-screens JD quality for red flags. Use when the user provides a JD and resume, asks about job fit or qualifications, wants to tailor their resume, or expresses general job-seeking intent. (e.g. 'analyze this job', 'check if I am qualified', 'help me find a job').
+metadata:
+  type: workflow
+  version: "1.0"
+  domain: career
 ---
 
 # Job Fit Analyzer
 
 ## Purpose
 
-Evaluate compatibility between a job description and a candidate resume. Produce a candid match score, dimension-level evidence, JD quality assessment, strengths, gaps, and application recommendations in a self-contained HTML report.
+Evaluate compatibility between a job description and a candidate resume. Produce a candid match score, dimension-level evidence, JD quality assessment, strengths, gaps, and actionable recommendations in a self-contained HTML report.
 
 ## When to Use
 
-- A user provides or asks to provide a job description and resume for compatibility analysis.
-- A user asks whether they are qualified for a role.
-- A user wants to tailor a resume for a specific job.
-- A user asks about gaps between their profile and a job's requirements.
-- A user wants ATS keyword coverage analysis.
-- A user expresses general job-seeking intent without materials yet.
-- A user asks for job search strategy or role-fit direction based on their profile.
+- User provides both JD and resume (text, file, or URL)
+- User asks if they are qualified for a role
+- User wants resume tailoring for a specific job
+- User asks for gaps analysis or ATS optimization
+- General job-seeking support (use guided conversation)
 
 ## Inputs
 
@@ -26,115 +28,47 @@ Require both inputs for a full analysis:
 1. Job description
 2. Candidate resume
 
-Accept text, files, or URLs. If either input is missing, ask for only the next useful item instead of sending a long checklist.
-
-If the user expresses general job-seeking intent without a target role or materials, use the guided conversation below before starting the workflow.
+If either is missing, ask for the missing piece only.
 
 ## Guided Conversation
 
 Ask one or two focused questions at a time.
 
-1. Acknowledge the goal and ask what role, industry, company type, or direction they are targeting.
-2. If they mention a specific posting, ask for the job description.
-3. If they are still exploring, ask for the resume first so you can identify plausible target roles.
-4. Once both JD and resume are available, run the workflow.
-
-Keep the tone natural and match the user's language.
+1. Clarify target role/industry if not provided.
+2. Ask for JD if they mention a specific posting.
+3. Ask for resume if they are still exploring.
+4. Once both are available, proceed to analysis.
 
 ## Resource Map
 
 Load references only when the corresponding phase needs them:
 
-- `references/jd-quality-check.md`: JD quality pre-screen, red flags, problem diagnosis, and role scope sanity checks.
-- `references/analysis-guide.md`: JD/resume extraction, qualitative comparison, gap analysis, and recommendation generation.
-- `references/scoring-framework.md`: five-dimension scoring model, weights, penalties, score bands, and edge cases.
-- `references/report-checklist.md`: report completeness and verification checklist.
-- `references/interview-transition.md`: handoff rules for `interview-coach`.
-- `assets/report-template.html`: HTML report structure and placeholders.
+- `references/jd-quality-check.md` — JD quality pre-screen and red flags
+- `references/analysis-guide.md` — Extraction, comparison, gap analysis
+- `references/scoring-framework.md` — Five-dimension scoring rules and weights
+- `references/report-checklist.md` — Final report verification
+- `references/interview-transition.md` — Handoff rules to `interview-coach`
+- `assets/report-template.html` — HTML report template
 
 ## Workflow
 
-Use this progress checklist while working:
+Follow this checklist:
 
-```text
-Job Fit Analysis Progress:
-- [ ] Phase 0: JD quality pre-screen
-- [ ] Phase 1: Extract structured JD and resume data
-- [ ] Phase 2: Score all five dimensions
-- [ ] Phase 3: Analyze strengths, gaps, keywords, and competitiveness
-- [ ] Phase 4: Generate recommendations
-- [ ] Phase 5: Build the HTML report
-- [ ] Phase 6: Verify and fix the report
-- [ ] Phase 7: Offer interview preparation when appropriate
-```
+- [ ] Phase 0: JD quality pre-screen (using jd-quality-check.md)
+- [ ] Phase 1: Extract structured data from JD and resume (using analysis-guide.md)
+- [ ] Phase 2: Score five dimensions (using scoring-framework.md)
+- [ ] Phase 3: Analyze strengths, gaps, ATS keywords, competitiveness
+- [ ] Phase 4: Generate three recommendation categories
+- [ ] Phase 5: Build HTML report from template
+- [ ] Phase 6: Verify report against checklist
+- [ ] Phase 7: Offer interview preparation if score >= 65 or "Competitive/Strong"
 
-### Phase 0: JD Quality Pre-Screen
+## Core Instructions
 
-Before scoring candidate fit, analyze the JD using `references/jd-quality-check.md`.
+1. Always start with **Phase 0** JD quality assessment before candidate scoring.
+2. Be honest and candid — do not inflate scores.
+3. Generate report in the dominant language of the JD (Chinese or English).
+4. Save the final report as `job-fit-report.html`.
+5. After presenting the report, follow interview-transition rules to offer next steps when appropriate.
 
-Produce a JD Quality Assessment for the report, including the seven required checks and an overall application verdict: `建议投递`, `慎投`, or `需面试验证` for Chinese reports, or equivalent labels for English reports.
-
-### Phase 1: Extract
-
-Extract structured information from the JD and resume using `references/analysis-guide.md`.
-
-If the JD or resume is too short or vague to support meaningful analysis, ask for more detail instead of guessing.
-
-### Phase 2: Compare and Score
-
-Score the candidate using `references/scoring-framework.md`.
-
-Return the overall score, all five dimension scores, evidence, reasoning, and any penalties. Make every score traceable to extracted evidence.
-
-### Phase 3: Analyze
-
-Use `references/analysis-guide.md` to produce:
-
-- matching and transferable skills
-- experience and qualification gaps
-- ATS keyword coverage
-- top strengths and weaknesses
-- overall competitiveness assessment
-
-Be honest. Do not inflate scores to make the candidate feel better.
-
-### Phase 4: Recommend
-
-Generate exactly three recommendation categories:
-
-- Resume Tailoring
-- Skill Gap Mitigation
-- Application Strategy
-
-Do not include interview-preparation content here; that belongs to `interview-coach`.
-
-### Phase 5: Generate Report
-
-Use `assets/report-template.html` to create a self-contained HTML report. Save it as `job-fit-report.html` unless the user requested another filename.
-
-Include the JD Quality Assessment before the match score. Replace every template placeholder with real content.
-
-### Phase 6: Verify
-
-Verify the report against `references/report-checklist.md`. If any item fails, fix the report and re-check before presenting it.
-
-### Phase 7: Interview Preparation Bridge
-
-After presenting the analysis, apply `references/interview-transition.md`.
-
-For candidates assessed as Competitive or Strong, or with score `>= 65`, proactively offer to continue with `interview-coach`. If the user agrees, pass the extracted JD data, resume data, strengths, gaps, and competitiveness assessment to that skill.
-
-## Output
-
-Always deliver:
-
-1. A concise conversation summary with match score, top strengths, top gaps, and verdict.
-2. The full HTML report file.
-3. The interview-preparation offer when the transition rules require it.
-
-## Language
-
-- If the JD and resume are Chinese, generate the report in Chinese.
-- If they are English, generate the report in English.
-- If mixed, match the dominant language of the JD.
-- Localize score labels, dimension names, and verdicts.
+For detailed guidance on any phase, read the corresponding reference file.

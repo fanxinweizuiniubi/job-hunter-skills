@@ -1,85 +1,74 @@
 # Extraction Criteria for Interview Prep
 
+## Purpose
+Provide consistent, structured parsing rules for Job Description and Resume to feed all downstream phases (question generation, STAR answers, gap analysis).
+
 ## Job Description Extraction
 
-### Hard Skills Categories
-Extract and categorize technical requirements:
-- **Languages** — Programming languages, spoken languages, domain-specific languages
-- **Frameworks & Libraries** — React, Spring, TensorFlow, etc.
-- **Tools & Platforms** — AWS, Docker, Kubernetes, Jira, Figma, etc.
-- **Methodologies** — Agile, Scrum, TDD, CI/CD, Data Modeling, etc.
-- **Domain Knowledge** — Finance, Healthcare, E-commerce, ML, etc.
+### 1. Hard Skills
+Categorize clearly:
+- **Programming Languages & DSLs**
+- **Frameworks & Libraries**
+- **Infrastructure & Tools** (Cloud, CI/CD, Monitoring, etc.)
+- **Methodologies & Practices** (Agile, TDD, Domain-Driven Design, etc.)
+- **Domain Knowledge** (Finance, Healthcare, Advertising, etc.)
 
-### Soft Skills Categories
-Map JD language to soft skill competencies:
-- "Lead a team" / "mentor" / "drive" → Leadership
-- "Collaborate with cross-functional teams" → Collaboration / Stakeholder Management
-- "Work under pressure" / "tight deadlines" → Stress Management / Prioritization
-- "Communicate to non-technical audiences" → Communication
-- "Resolve conflicts" / "negotiate" → Conflict Resolution
-- "Take initiative" / "self-starter" → Proactivity / Ownership
-- "Adapt to changing priorities" → Adaptability / Flexibility
+### 2. Soft Skills & Competencies
+Map common JD phrases to competencies:
+- Leadership, Ownership, Stakeholder Management, Communication, Collaboration, Prioritization, Adaptability, Conflict Resolution, Mentorship, etc.
 
-### Seniority Calibration
-Determine the seniority level to calibrate question difficulty:
-- **Junior (0-2 years)** — Focus on fundamentals, learning ability, teamwork
-- **Mid-level (3-5 years)** — Focus on independence, problem-solving, domain depth
-- **Senior (5-8 years)** — Focus on system design, mentoring, cross-team impact
-- **Staff/Principal (8+ years)** — Focus on architecture, strategy, org-wide influence, ambiguous problem solving
+### 3. Seniority & Scope
+Determine level:
+- **Junior**: Fundamentals + learning agility
+- **Mid-level**: Independent delivery + problem solving
+- **Senior**: System design + mentoring + cross-team impact
+- **Staff+**: Architecture strategy + organizational influence + ambiguity handling
 
-### Culture Indicators
-Look for signals about company culture and work style:
-- Fast-paced / startup vs. structured / enterprise
-- Individual contributor focus vs. collaborative
-- Innovation-driven vs. execution-driven
-- Customer-facing vs. internal-facing
-- Data-driven vs. intuition-driven
+### 4. Culture & Context
+Extract signals: pace, collaboration style, decision-making approach, values.
 
 ## Resume Extraction
 
-### Achievement Fodder
-Identify resume bullets that can become STAR stories. Look for:
-- Verbs that imply action: led, built, designed, implemented, optimized, reduced, increased, launched
-- Quantifiable results: percentages, dollar amounts, user counts, time savings
-- Scope indicators: team size, project budget, user base, system scale
-- Challenge indicators: "despite", "under", "with limited", "from scratch"
+### 1. Strong Achievement Bullets (STAR Fodder)
+Prioritize bullets containing:
+- Strong action verbs (led, designed, optimized, launched...)
+- Quantifiable impact (%, $, users, time saved, revenue...)
+- Scope & complexity indicators
 
-### Career Transition Flags
-Flag transitions that will attract questions:
-- Industry switches (e.g., finance → tech)
-- Role switches (e.g., individual contributor → manager)
-- Technology switches (e.g., backend → ML)
-- Company type switches (e.g., startup → big corp)
-- Downward title moves (e.g., Senior → Mid-level)
+### 2. Risk & Question Flags
+- **Employment Gaps** (> 4 months)
+- **Short Tenures** (< 12 months)
+- **Career Transitions** (role/industry/tech/company type)
+- **Seniority Mismatch**
+- **Unexplained Overlaps or Missing Dates**
 
-### Gap and Risk Flags
-Identify parts of the resume that may raise concerns:
-- Employment gaps longer than 3-6 months
-- Multiple short tenures (< 1 year)
-- Overlapping employment dates
-- Job titles that don't clearly map to responsibilities
-- Missing dates
-- Very long tenures (> 5 years) with no promotion
-- Skills listed but no supporting experience
+### 3. Skills Mapping
+- Explicitly listed skills + demonstrated usage
+- Transferable skills from adjacent experience
 
-## Cross-Analysis Tension Points
+## Cross-Analysis Tension Points (Prioritized)
 
-### High-Priority Tension Points (almost certainly will be asked)
-1. Required skill in JD with no mention in resume
-2. Seniority mismatch (e.g., applying for Senior with 2 years experience)
-3. Major domain gap (e.g., applying for fintech with no finance background)
-4. Leadership requirement with no leadership experience
-5. Employment gap during a critical period
+**High Priority (几乎必然被问):**
+- JD-required skill missing or weak in resume
+- Significant seniority gap
+- Major domain or leadership experience gap
+- Notable employment gaps during relevant periods
 
-### Medium-Priority Tension Points (may be asked)
-1. Preferred skill in JD with no mention in resume
-2. Tool/framework gap where a similar tool is known
-3. Short tenure that might look like a firing
-4. Career transition without clear narrative
-5. Overqualified on paper for the role
+**Medium Priority:**
+- Preferred (nice-to-have) skills missing
+- Similar but not exact tool/framework experience
+- Short or unclear tenures
+- Overqualified signals
 
-### Low-Priority Tension Points (possible icebreaker or follow-up)
-1. Certification requirement without certification
-2. Education level below JD preference
-3. Industry knowledge gap that can be learned quickly
-4. Specific methodology not used before
+**Low Priority:**
+- Minor certification/education gaps
+- Easily learnable domain knowledge
+
+## Output Format Recommendation
+
+For each analysis, produce:
+1. Structured summary of JD requirements
+2. Structured resume profile
+3. Ranked list of tension points with supporting evidence from both documents
+
+**Next Step:** Use this analysis directly to generate personalized questions and identify preparation gaps.
