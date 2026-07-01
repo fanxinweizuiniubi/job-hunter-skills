@@ -29,10 +29,10 @@ Scan the JD for terms that hint at toxic culture or excessive workload:
 
 | Keyword Pattern | Signal | Risk Level |
 |----------------|--------|------------|
-| "抗压能力强" "承压能力" "高压环境" | 工作强度大，可能有频繁加班 | 🔴 High |
+| "抗压能力强" "承压能力" "有服务意识" | 工作强度大，可能有频繁加班 | 🔴 High |
 | "996" "大小周" "弹性工作=随时响应" | 明确的长工时文化 | 🔴 High |
 | "24小时响应" "随叫随到" | 无边界的工作侵入个人时间 | 🔴 High |
-| "吃苦耐劳" "以公司为家" | PUA前兆，期望员工无条件奉献 | 🔴 High |
+| "吃苦耐劳" "以公司为家" "热爱工作" | PUA前兆，期望员工无条件奉献 | 🔴 High |
 | "拥抱变化" "快速迭代" × 3+ | 可能意味着方向频繁变动、缺乏规划 | 🟡 Medium |
 | "结果导向" "狼性文化" | 可能意味高压淘汰制 | 🟡 Medium |
 | "扁平化管理" + 薪资偏低 | 可能用"扁平"掩盖晋升通道缺失 | 🟡 Medium |
@@ -47,12 +47,8 @@ If 3+ 🟡 keywords → flag as "需面试时深入了解".
 
 Assess how specific the JD is. A good JD has concrete, measurable duties. A vague JD suggests the hiring manager hasn't thought through the role.
 
-Scoring (0-100):
-- Each responsibility with: measurable outcome / specific technology / concrete scenario → +15
-- Each responsibility that is generic ("负责XX工作" "参与XX项目") → +5
-- Each requirement with: specific skill name / years / certification → +10
-- Each requirement that is generic ("良好的沟通能力" "积极主动") → +2
-- Bonus: JD mentions team size, reporting structure, or project stage → +10
+不好的jd会用一些大词，比如负责数据分析、内容策划、活动跟进、社区运营，那说明招聘者自己没想清楚。
+好的jd会写的很具体，比如基于用户分层制定运营策略，并通过A/B测试持续优化，实现转换率提升，这样你能知道具体要做什么，以及KPI是什么。
 
 Interpretation:
 - 80+: 企业想得很清楚，岗位目标明确

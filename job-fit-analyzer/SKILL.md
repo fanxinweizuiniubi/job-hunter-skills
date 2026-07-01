@@ -24,23 +24,25 @@ Systematically evaluate the compatibility between a job description and a candid
 
 The skill requires two inputs to perform a full analysis:
 
-1. **Job Description** — Full text of the job posting, including title, responsibilities, requirements, qualifications, and any stated preferences. May be provided as pasted text, a file path (PDF/DOCX/TXT/HTML), or a URL.
-2. **Candidate Resume** — Full text of the resume, including summary, work experience, skills, education, certifications, and projects. May be provided as pasted text or a file path (PDF/DOCX/TXT/HTML).
+1. **Job Description** 
+2. **Candidate Resume**
 
-**If the user expresses general job-seeking intent** (e.g., "I'd like to find a new job", "I want a job", "help me find a job") but has not provided either or both inputs, do not ask for both at once. Instead, enter the **Guided Conversation Flow** below to progressively gather context and materials.
+Both may be provided as text, file, or URL.
+
+**If the user expresses general job-seeking intent**  but has not provided either or both inputs, do not ask for both at once. Instead, enter the **Guided Conversation Flow** below to progressively gather context and materials.
 
 ## Guided Conversation Flow (for General Job-Seeking Expressions)
 
-When the user says something broad like *"I'd like to find a new job"*, *"I want a job"*, *"help me find a job"*, or similar expressions without providing a job description or resume, do **not** immediately ask for both documents. Instead, guide the conversation naturally through these steps:
+When the user expresses general job-seeking intent without providing a job description or resume, do **not** immediately ask for both documents. Instead, guide the conversation naturally through these steps:
 
 ### Step 1: Acknowledge and Set Context
-Start with a brief, warm acknowledgment (e.g., *"Happy to help you with your job search!"*) and immediately ask **one focused question**:
+Start with a brief, warm acknowledgment and immediately ask **one focused question**:
 
 > "To give you the most useful help, could you tell me a bit about what kind of role you're looking for? For example, job title, industry, or anything specific you have in mind."
 
 ### Step 2: Gather the Target
 After the user responds with their target role or interest:
-- If they mention a specific job posting or company → ask them to share the job description (paste text, file, or URL).
+- If they mention a specific job posting or company → ask them to share the job description.
 - If they are unsure or exploring → ask for their resume first so you can help identify suitable roles based on their profile.
 
 ### Step 3: Gather the Resume

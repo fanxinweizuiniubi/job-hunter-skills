@@ -1,12 +1,12 @@
 ---
 name: job-hunter
-description: Help users find jobs and analyze job fit. Use when the user wants to search for jobs, analyze job descriptions against their resume, prepare for interviews, or optimize their career search strategy. Should be triggered by phrases like "find a job", "job search", "career", "求职", "找工作", "跳槽".
+description: Help users find jobs and analyze job fit. Use when the user wants to analyze job descriptions against their resume, or prepare for interviews. Should be triggered by phrases like "find a job", "career", "求职", "找工作", "跳槽".
 agent_created: true
 ---
 
 # Job Hunter
 
-Help users find the right job by collecting structured preferences and providing actionable job search support.
+Help users find the right job by collecting structured preferences, resume and job descriptions analysis, and interview preparation.
 
 ## Core Principles
 
@@ -30,11 +30,10 @@ If unclear, default to Mode A and build a profile first.
 **Ask ALL questions together** using the native structured-question UI (`AskUserQuestion`). Do not ask one by one in chat.
 
 **Question 1 — Target Role** (header: "目标职位"):
-What role are you looking for? Options:
+What role are you looking for? (Single-choice question) Options:
+- 产品经理
 - 前端工程师
 - 后端工程师
-- 全栈工程师
-- 产品经理
 - 数据分析师
 - 算法工程师
 - UI/UX设计师
@@ -143,4 +142,3 @@ When the user wants to improve their resume:
 | `job-fit-analyzer` skill | Analyze resume vs JD compatibility | Phase 2 |
 | `interview-coach` skill | Generate personalized interview questions, STAR answers, and prep materials | Phase 3 |
 | Web search | Research companies, roles, salary benchmarks | Throughout |
-| `westock-data` / `westock-tool` | If user is interested in finance/quant roles | As needed |
