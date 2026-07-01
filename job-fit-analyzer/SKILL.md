@@ -1,6 +1,6 @@
 ---
 name: job-fit-analyzer
-description: Evaluates job compatibility by comparing a job description against a candidate's resume across five dimensions — hard skills, experience, education/certifications, ATS keyword coverage, and responsibilities alignment. Also pre-screens JD quality for red flags. Use when the user provides a JD and resume, asks about job fit or qualifications, wants to tailor their resume, or expresses general job-seeking intent. (e.g. 'analyze this job', 'check if I am qualified', 'help me find a job').
+description: Evaluates job compatibility by comparing a job description against a candidate's resume across five dimensions — hard skills depth, past achievements & business impact, role scope/complexity/seniority match, domain/scenario relevance, and learning ability & potential (12%). Also pre-screens JD quality for red flags. Use when the user provides a JD and resume, asks about job fit or qualifications, wants to tailor their resume, or expresses general job-seeking intent. (e.g. 'analyze this job', 'check if I am qualified', 'help me find a job').
 metadata:
   type: workflow
   version: "1.0"
