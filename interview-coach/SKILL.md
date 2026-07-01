@@ -116,14 +116,3 @@ Use `assets/interview-prep-template.html` if available.
 3. `references/star-framework-guide.md`
 4. `references/preparation-gaps.md`
 5. `assets/interview-prep-template.html`（可选）
-
----
-
-**这个版本是否符合你的预期？**
-
-如果你需要，我可以继续帮你：
-- 撰写其中一个 `references/` 文件
-- 创建完整的 `assets/interview-prep-template.html`
-- 进一步微调某个部分
-
-直接告诉我下一步怎么调整即可！
