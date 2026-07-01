@@ -60,7 +60,7 @@ Copy this checklist and mark progress during analysis:
 
 ```
 Job Fit Analysis Progress:
-- [ ] Phase 0: JD Quality Pre-Screen (6 checks)
+- [ ] Phase 0: JD Quality Pre-Screen (7 checks)
 - [ ] Phase 1: Extract JD and resume structured data
 - [ ] Phase 2: Score all 5 dimensions
 - [ ] Phase 3: Qualitative analysis (gaps, strengths, weaknesses)
@@ -74,7 +74,7 @@ Job Fit Analysis Progress:
 
 Before scoring, analyze the JD for red flags and quality signals. This helps the candidate decide whether to even apply. Present findings as a **JD Quality Assessment** section at the top of the report, before the match score.
 
-Six checks are required. Full procedures, scoring rubrics, keyword tables, and interpretation guides are in [references/jd-quality-check.md](references/jd-quality-check.md). Summary:
+Seven checks are required. Full procedures, scoring rubrics, keyword tables, and interpretation guides are in [references/jd-quality-check.md](references/jd-quality-check.md). Summary:
 
 | # | Check | What it flags |
 |---|-------|---------------|
@@ -84,6 +84,7 @@ Six checks are required. Full procedures, scoring rubrics, keyword tables, and i
 | 4 | Generic/Specific Ratio | Ratio of vague soft-skill asks to concrete hard-skill requirements |
 | 5 | PUA / Culture Indicators | Subtle red flags beyond obvious keywords ("薪资open", "期权激励"无细节) |
 | 6 | Problem Diagnosis | Infer business problems behind each duty → map to candidate's experience |
+| 7 | Role Scope Sanity Check | Detect "one person doing three people's jobs" (职责过载) |
 
 After analysis, generate the summary table (template in reference) and produce a "综合可投性" verdict: **建议投递 / 慎投 / 需面试验证**.
 
@@ -158,7 +159,7 @@ Generate actionable, specific recommendations to improve the candidate's chances
 
 Produce a self-contained HTML report using the template at `assets/report-template.html`. The report includes:
 
-- **JD Quality Assessment** (from Phase 0) — MUST appear at the top, before the match score. Include: salary match, red-flag keyword scan with specific findings, concreteness score, generic/specific ratio, PUA detection, problem diagnosis with Problem→Resume mapping table, and an overall "可投性" verdict
+- **JD Quality Assessment** (from Phase 0) — MUST appear at the top, before the match score. Include: salary match, red-flag keyword scan with specific findings, concreteness score, generic/specific ratio (with "好词识别"), PUA detection, problem diagnosis with Problem→Resume mapping table, role scope sanity check, and an overall "可投性" verdict
 - Header with job title, candidate name, and analysis date
 - Overall match score with a visual gauge
 - Dimension score breakdown (bar chart or progress bars) — 5 dimensions, NOT 6
@@ -184,7 +185,7 @@ Before presenting the final result, verify the report against this checklist. If
 ```
 Report Verification:
 - [ ] JD Quality Assessment is at the top, before match score
-- [ ] All 6 JD checks are present with specific findings (not generic)
+- [ ] All 7 JD checks are present with specific findings (not generic)
 - [ ] Problem Diagnosis table maps each duty → problem → candidate experience
 - [ ] Overall score matches the weighted sum of 5 dimensions (recalculate)
 - [ ] Every dimension has a collapsible <details> with formula + sub-scores
