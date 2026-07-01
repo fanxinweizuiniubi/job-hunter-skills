@@ -4,104 +4,109 @@ This document defines the exact scoring methodology used by the Job Fit Analyzer
 
 ## Overall Score Calculation
 
-Overall Score = (Hard Skills × 0.25) 
-              + (Experience × 0.25) 
-              + (Responsibilities Alignment × 0.20)
-              + (Education & Certifications × 0.15)
-              + (ATS Keyword Coverage × 0.15)
+Overall Score =
+(硬技能深度 × 0.28) + (过往成果影响力 × 0.25) + (职责范围复杂度 × 0.20) + (领域场景相关性 × 0.15) + (学习能力潜力 × 0.12)
 
 Score range: 0–100.
 
-## Score Bands
+---
 
-Range | Label | Meaning
---- | --- | ---
-85–100 | Excellent Fit | Outstanding match, strong competitive edge
-70–84 | Good Fit | Solid candidate with minor addressable gaps
-55–69 | Moderate Fit | Viable but has notable gaps
-40–54 | Stretch Fit | Significant gaps, application is a stretch
-0–39 | Poor Fit | Does not meet core requirements
+### **1. 硬技能深度与精准匹配度（28%）**
 
-## Dimension Scoring Rubrics
+**核心考察**：候选人对 JD 核心硬技能的掌握程度和深度。
 
-### 1. Hard Skills Match (25%)
+**评分标准**：
 
-Formula:
-Score = [(Direct Matches × 1.0) + (Transferable Matches × 0.6)] / Total Required Skills × 100
+| 分数 | 描述 |
+|------|------|
+| 90-100 | 所有核心技能均有扎实生产经验，深度足够，能解决复杂问题 |
+| 75-89  | 核心技能基本覆盖，多数有实际使用经验，少量可快速补齐 |
+| 60-74  | 主要技能大部分具备，但深度一般或有 1-2 项明显弱项 |
+| 45-59  | 多个核心技能缺失，主要依赖可迁移技能或仅理论了解 |
+| 0-44   | 大量核心技能缺失，不满足基本要求 |
 
-- Direct Match: Clear evidence in experience descriptions or strong contextual use.
-- Transferable Match: Closely related skill (60% credit).
-- Skills only listed (no context): 80% credit.
-- "Required or equivalent" → strong alternatives count as Direct.
+**提示**：优先看“在什么项目中如何使用”，而非仅看技能列表。
 
-### 2. Experience Match (25%)
+---
 
-Sub-weights:
-- Relevant years: 35%
-- Seniority level: 30%
-- Domain / Role relevance: 35%
+### **2. 过往成果与业务影响力（25%）**
 
-Years Scoring:
-- Meets or exceeds → 100
-- Within 1 year short → 80
-- Within 2 years short → 60
-- 3+ years short → 40 or lower
+**核心考察**：候选人是否真正“做出过成绩”，这是最有预测力的维度。
 
-Seniority Levels:
-Entry (0-2) → Junior (2-4) → Mid (4-7) → Senior (7-10) → Lead/Staff (10-15) → Principal+
+**评分标准**：
 
-### 3. Responsibilities Alignment (20%)
+| 分数 | 描述 |
+|------|------|
+| 90-100 | 有多个可量化、高影响力的成果（显著提升性能、收入、用户规模等），与目标岗位高度相关 |
+| 75-89  | 有明确成果，但数量或影响力稍弱 |
+| 60-74  | 有成果描述，但量化不足或相关性一般 |
+| 40-59  | 成果描述模糊，或主要是“参与”而非“主导” |
+| 0-39   | 几乎没有成果描述，或成果与岗位无关 |
 
-Extract 5–10 key responsibilities from the JD.  
-For each, assess if candidate has performed similar duties:
-- Directly / Near-exact → 100%
-- Partially → 50%
-- None → 0%
+**重点看**：数字、比例、前后对比、个人贡献占比。
 
-Dimension Score = Sum of credits / Total responsibilities × 100
+---
 
-### 4. Education & Certifications (15%)
+### **3. 职责范围、复杂度与 Seniority 匹配度（20%）**
 
-- Education (60%): Degree level + field relevance
-- Certifications (40%): Fulfillment rate of required vs preferred
+**核心考察**：承担的工作范围、难度和层级是否匹配 JD 要求。
 
-Education Scoring:
-- Meets or exceeds → 100
-- One level below + strong experience → 70
-- One level below without compensation → 50
-- Does not meet → 25
+**评分标准**：
 
-### 5. ATS Keyword Coverage (15%)
+| 分数 | 描述 |
+|------|------|
+| 90-100 | 职责范围、复杂度、决策层级与 JD 高度一致或更高 |
+| 75-89  | 整体匹配良好，仅个别职责稍弱 |
+| 60-74  | 部分职责匹配，但 Scope 或复杂度有明显差距 |
+| 40-59  | 主要职责层级偏低（低 1-2 个 Seniority 级别） |
+| 0-39   | 职责范围和复杂度远低于 JD 要求 |
 
-Score = (Found Keywords / Total Significant Keywords) × 100
+**判断依据**：项目规模、是否独立负责、是否涉及架构/跨团队/技术决策等。
 
-- Prioritize keywords from "Required" sections and high-frequency terms.
-- Distinguish "demonstrated in experience" (strong) vs "listed only" (moderate).
-- Flag keyword stuffing risk.
+---
 
-## Transferable Skill Mapping (Reference)
+### **4. 领域/行业/场景经验相关性（15%）**
 
-JD Skill | Strong Transferables | Credit Level
---- | --- | ---
-Kubernetes | Docker Swarm, ECS, Mesos | High (80%)
-AWS | Azure, GCP | High (80%)
-React | Vue, Angular, Svelte | High (80%)
-Python | Ruby, JS (scripting) | Medium (60%)
-Tableau | Power BI, Looker, Qlik | High (80%)
-Salesforce | HubSpot, Dynamics 365 | Medium (60%)
+**核心考察**：业务领域、行业特性、具体场景的匹配度。
 
-Unmapped cases: judge by conceptual similarity (50–70% credit).
+**评分标准**：
 
-## Penalty Modifiers (applied last)
+| 分数 | 描述 |
+|------|------|
+| 90-100 | 相同或高度相似的行业 + 业务场景 |
+| 75-89  | 同一大类领域，场景接近（例如同为 To C 大流量） |
+| 60-74  | 相关领域，但场景有差异 |
+| 40-59  | 跨度较大（例如传统软件 → 互联网消费） |
+| 0-39   | 基本不相关 |
 
-Condition | Modifier
---- | ---
-Missing central required hard skill | -5 ~ -10
-Significantly overqualified (2+ levels) | -5 ~ -8
-Heavy irrelevant experience padding | -3 ~ -6
-Keyword stuffing (list but no proof) | Note risk
-Noticeable resume quality issues | -2 ~ -5
+**示例**：JD 是 fintech 风控，要求候选人有银行/支付/借贷场景经验优先。
 
-Final score is clamped between 0–100.
+---
 
-**Note**: Soft skills are deliberately excluded from scoring. They are better evaluated in interviews.
+### **5. 学习能力、潜力和适应性（12%）**
+
+**核心考察**：快速学习新技术和适应新环境的能力（对中高级岗位尤其重要）。
+
+**评分标准**：
+
+| 分数 | 描述 |
+|------|------|
+| 85-100 | 有多段快速上手新领域/技术并产出成果的记录，学习曲线陡峭 |
+| 70-84  | 有学习新技术的积极记录，能较快适应 |
+| 55-69  | 学习能力一般，主要在熟悉领域深耕 |
+| 40-54  | 学习记录较少，或适应新环境速度慢 |
+| 0-39   | 几乎无证据显示有较强学习能力 |
+
+**判断依据**：跨领域跳槽经历、新技术快速掌握案例、自我驱动项目等。
+
+---
+
+### **使用说明**
+
+1. **打分顺序建议**：先打 1、3、4（客观部分），再打 2 和 5（需要综合判断）。
+2. **最终解释**：除了总分，建议为每个维度写 1-2 句简短评语。
+3. **惩罚项**（可选，最后应用）：
+   - 缺失最核心的 1-2 项硬技能：总分 -8～-12
+   - 明显夸大成果或职责：总分 -10～-15
+   - 简历造假风险明显：直接视为不合格
+
