@@ -74,24 +74,6 @@ job-hunter 收集偏好 → 建立求职画像
 docx 输出优化后简历
 ```
 
-## 使用方式
-
-这些技能设计为在 [WorkBuddy](https://www.codebuddy.cn) 平台上运行。将本仓库克隆到 WorkBuddy 的技能目录后即可使用：
-
-```bash
-# 用户级技能（所有项目可用）
-git clone <repo-url> ~/.workbuddy/skills/job-hunter-skills
-
-# 或项目级技能（仅当前项目可用）
-git clone <repo-url> <project>/.workbuddy/skills/job-hunter-skills
-```
-
-## 技术实现
-
-- 技能编排：Markdown 驱动的 SKILL.md 定义，支持多阶段工作流
-- 前端输出：HTML 模板 + 内联样式，自包含单文件交付
-- 文档处理：基于 python-docx 和 pandoc 的 .docx 读写管线
-
 ## License
 
 [Apache License 2.0](LICENSE)
